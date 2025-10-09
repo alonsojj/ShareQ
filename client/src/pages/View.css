@@ -1,0 +1,395 @@
+:root {
+  --primary-color: #007bff;
+  --secondary-color: #6c757d;
+  --font-family: Arial, sans-serif;
+  --font-color: #fff;
+  --font-size: 16px;
+  --button-padding: 10px 20px;
+  --button-border-radius: 5px;
+}
+
+body {
+  font-family: var(--font-family);
+  font-size: var(--font-size);
+  color: var(--font-color);
+  margin: 0;
+  padding: 0;
+}
+
+.nv-root {
+  width: 100vw;
+  min-height: 100vh;
+  background: #111;
+  overflow-x: hidden;
+}
+
+header.nv-header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  width: 100%;
+  background: rgba(34, 34, 34, 0.85);
+  z-index: 200;
+  height: 64px;
+  display: flex;
+  align-items: center;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.12);
+  transition: top 0.4s cubic-bezier(0.4, 0, 0.2, 1),
+    opacity 0.4s cubic-bezier(0.4, 0, 0.2, 1), visibility 0.4s;
+  opacity: 1;
+  visibility: visible;
+}
+
+.nv-header-hidden {
+  top: -64px !important;
+  opacity: 0;
+  pointer-events: none;
+  visibility: hidden;
+}
+
+.nv-header-content {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  width: 100%;
+  align-items: center;
+  height: 100%;
+}
+
+.nv-header-info {
+  display: flex;
+  align-items: center;
+  height: 100%;
+}
+
+.nv-title {
+  margin: 0;
+  padding-left: 1rem;
+  font-size: 1.3rem;
+  color: #fff;
+  font-weight: 600;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.nv-header-actions {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+  justify-content: flex-end;
+  height: 100%;
+  padding-right: 1rem;
+}
+
+.nv-btn,
+.nv-btn-icon {
+  padding: 10px 30px;
+  background: #667eea;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: bold;
+}
+
+.nv-btn-icon {
+  padding: 10px;
+  font-size: 1.3rem;
+  width: 42px;
+  height: 42px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.nv-btn-icon svg {
+  width: 22px;
+  height: 22px;
+  color: #fff;
+}
+
+.nv-btn:hover,
+.nv-btn-icon:hover {
+  background: #0056b3;
+}
+
+main.nv-pdf-area {
+  width: 100%;
+  min-height: 100vh;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-sizing: border-box;
+  background: #111;
+}
+
+.nv-pdf-area-with-thumbnails {
+  padding-bottom: 110px;
+}
+
+.nv-pdf-page-wrapper {
+  height: 100%;
+  width: auto;
+  max-width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto;
+  position: relative;
+  box-sizing: border-box;
+  transition: transform 0.25s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.25s;
+  will-change: transform, opacity;
+  overflow: hidden;
+}
+
+.nv-pdf-document {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  max-width: 100%;
+}
+
+.nv-pdf-page {
+  max-width: 100%;
+  height: auto !important;
+  overflow: hidden;
+}
+
+.nv-slide-left {
+  animation: nv-slide-left 0.25s;
+}
+.nv-slide-right {
+  animation: nv-slide-right 0.25s;
+}
+
+@keyframes nv-slide-left {
+  0% {
+    opacity: 0.2;
+    transform: translateX(-60px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+@keyframes nv-slide-right {
+  0% {
+    opacity: 0.2;
+    transform: translateX(60px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.nv-pdf-textlayer {
+  max-height: 100%;
+  height: 100%;
+  overflow: hidden;
+  background: transparent;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  pointer-events: none;
+}
+
+.nv-control {
+  position: fixed;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 101;
+  background: rgba(255, 255, 255, 0.1);
+  color: #fff;
+  border: none;
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  font-size: 1.8rem;
+  cursor: pointer;
+  opacity: 0.7;
+  transition: opacity 0.3s, background-color 0.3s;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+  outline: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.nv-control svg {
+  display: block;
+}
+
+.nv-control:hover {
+  opacity: 1;
+  background: rgba(255, 255, 255, 0.2);
+}
+
+.nv-control-left {
+  left: 20px;
+}
+
+.nv-control-right {
+  right: 20px;
+}
+
+@media (max-width: 768px) {
+  .nv-control {
+    width: 42px;
+    height: 42px;
+    font-size: 1.5rem;
+  }
+
+  .nv-control-left {
+    left: 10px;
+  }
+
+  .nv-control-right {
+    right: 10px;
+  }
+}
+
+.nv-page-counter {
+  position: fixed;
+  bottom: 32px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: #222;
+  color: #fff;
+  padding: 8px 18px;
+  border-radius: 24px;
+  font-size: 1rem;
+  z-index: 101;
+}
+
+.nv-loading-container,
+.nv-notfound-container {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #111;
+}
+
+.nv-notfound-card {
+  background: #222;
+  color: #fff;
+  padding: 2rem 3rem;
+  border-radius: 12px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.12);
+  text-align: center;
+}
+
+.nv-error {
+  color: #ff4d4f;
+  font-size: 1.1rem;
+  margin-top: 1rem;
+}
+
+.nv-thumbnails-bar {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: rgba(34, 34, 34, 0.95);
+  padding: 10px 0;
+  z-index: 102;
+  overflow-x: auto;
+  white-space: nowrap;
+}
+
+.nv-thumbnails-list {
+  display: flex;
+  gap: 10px;
+  padding: 0 10px;
+}
+
+.nv-thumbnail {
+  cursor: pointer;
+  border: 2px solid transparent;
+  border-radius: 4px;
+  transition: border-color 0.2s;
+  height: 80px;
+  overflow: hidden;
+  background: #111;
+  flex-shrink: 0;
+}
+
+.nv-thumbnail .react-pdf__Page__canvas {
+  max-width: 100%;
+  height: auto !important;
+}
+
+.nv-thumbnail.nv-thumbnail-active {
+  border-color: var(--primary-color);
+}
+
+@media (max-width: 768px) {
+  main.nv-pdf-area {
+    padding-top: 64px;
+  }
+
+  header.nv-header {
+    top: 0 !important;
+    opacity: 1 !important;
+    visibility: visible !important;
+  }
+
+  .nv-title {
+    font-size: 1rem;
+  }
+
+  .nv-header-actions {
+    gap: 0.5rem;
+  }
+
+  .nv-btn,
+  .nv-btn-icon {
+    padding: 8px 12px;
+    font-size: 14px;
+  }
+
+  .nv-btn-icon {
+    width: 38px;
+    height: 38px;
+  }
+
+  .nv-control {
+    padding: 8px;
+    font-size: 1.2rem;
+  }
+
+  .nv-control-left {
+    left: 10px;
+  }
+
+  .nv-control-right {
+    right: 10px;
+  }
+
+  .nv-page-counter {
+    font-size: 0.9rem;
+    padding: 6px 12px;
+    bottom: 10px;
+  }
+
+  .nv-keyboard-tip {
+    display: none;
+  }
+
+  .nv-thumbnails-bar {
+    padding: 5px 0;
+  }
+
+  .nv-thumbnail {
+    height: 60px;
+  }
+
+  .nv-pdf-area-with-thumbnails {
+    padding-bottom: 80px;
+  }
+}
