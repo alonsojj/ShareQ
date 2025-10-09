@@ -5,7 +5,6 @@ const cors = require("cors");
 const { v4: uuidv4 } = require("uuid");
 const path = require("path");
 const fs = require("fs");
-const path = require("path");
 
 const app = express();
 const PORT = process.env.PORT || 3001;
@@ -55,8 +54,6 @@ app.post("/api/upload", upload.single("file"), async (req, res) => {
     const presentationId = uuidv4();
     const presentationUrl = `${process.env.FRONTEND_URL}/view/${presentationId}`;
 
-    const qrCodeDataUrl = await QRCode.toDataURL(presentationUrl);
-
     const presentation = {
       id: presentationId,
       originalName: customName || file.originalname,
@@ -65,7 +62,6 @@ app.post("/api/upload", upload.single("file"), async (req, res) => {
       mimeType: file.mimetype,
       size: file.size,
       url: presentationUrl,
-      qrCode: qrCodeDataUrl,
       createdAt: new Date(),
     };
 
@@ -75,7 +71,6 @@ app.post("/api/upload", upload.single("file"), async (req, res) => {
       success: true,
       presentationId,
       url: presentationUrl,
-      qrCode: qrCodeDataUrl,
       fileUrl: `${process.env.BACKEND_URL}/uploads/${file.filename}`,
     });
   } catch (error) {
