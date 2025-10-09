@@ -1,0 +1,329 @@
+:root {
+  --primary-color: #667eea;
+  --primary-hover-color: #5568d3;
+  --secondary-color: #24292e;
+  --background-color: #1d1d20;
+  --text-color: #fff;
+  --text-secondary-color: #ccc;
+  --border-color: #444;
+  --success-color: #4caf50;
+  --error-color: #ff4d4f;
+  --border-radius: 5px;
+}
+
+.upload-btn {
+  padding: 12px 30px;
+  background: var(--primary-color);
+  color: var(--text-color);
+  border: none;
+  border-radius: var(--border-radius);
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: bold;
+  width: 100%;
+}
+
+.upload-btn:hover {
+  background: var(--primary-hover-color);
+}
+
+.upload-btn:disabled {
+  background: var(--border-color);
+  cursor: not-allowed;
+}
+
+.copy-btn {
+  padding: 8px 18px;
+  background: var(--primary-color);
+  color: var(--text-color);
+  border: none;
+  border-radius: var(--border-radius);
+  cursor: pointer;
+  font-size: 15px;
+  font-weight: bold;
+  margin-left: 8px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  transition: background-color 0.3s ease;
+}
+
+.copy-btn:hover {
+  background: var(--primary-hover-color);
+}
+
+.copy-btn.copied {
+  background-color: var(--success-color);
+}
+
+.download-button,
+.view-button {
+  padding: 10px 24px;
+  background: var(--primary-color);
+  color: var(--text-color);
+  border: none;
+  border-radius: var(--border-radius);
+  cursor: pointer;
+  font-size: 15px;
+  font-weight: bold;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+
+.download-button {
+  background: var(--primary-color);
+}
+
+.view-button {
+  background: var(--success-color);
+}
+
+
+.download-button:hover,
+.view-button:hover {
+  background: var(--primary-hover-color);
+}
+
+.dropzone {
+  border: 2px dashed var(--primary-color);
+  border-radius: 10px;
+  padding: 40px;
+  text-align: center;
+  cursor: pointer;
+  transition: border-color 0.2s;
+  margin-bottom: 20px;
+}
+
+.dropzone-active {
+  border-color: var(--primary-hover-color);
+}
+
+.dropzone p {
+  margin: 0;
+  font-size: 1.1rem;
+  color: var(--text-secondary-color);
+}
+
+.result-section {
+  margin-top: 30px;
+  background: var(--secondary-color);
+  padding: 30px;
+  border-radius: 10px;
+}
+
+.file-details-box {
+  background: var(--secondary-color);
+  border-radius: 10px;
+  padding: 30px;
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  gap: 30px;
+  align-items: center;
+}
+
+.upload-options {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.upload-options input {
+  padding: 10px;
+  border-radius: var(--border-radius);
+  border: 1px solid var(--border-color);
+  background: var(--background-color);
+  color: var(--text-color);
+}
+
+.expiration-control {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.expiration-control label {
+  font-size: 0.9rem;
+  text-align: left; /* Align label text to the left */
+}
+
+.expiration-input {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.expiration-input input[type="range"] {
+  -webkit-appearance: none;
+  appearance: none;
+  flex-grow: 1;
+  height: 8px;
+  background: var(--border-color);
+  border-radius: 5px;
+  outline: none;
+}
+
+.expiration-input input[type="range"]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 20px;
+  height: 20px;
+  background: var(--primary-color);
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+.expiration-input input[type="range"]::-moz-range-thumb {
+  width: 20px;
+  height: 20px;
+  background: var(--primary-color);
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+.expiration-input input[type="number"] {
+  width: 70px;
+}
+
+.success-message {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 15px;
+  color: var(--success-color);
+}
+
+.file-icon svg {
+  width: 80px;
+  height: 80px;
+  color: var(--primary-color);
+}
+
+.success-message p {
+  font-size: 1.2rem;
+  font-weight: bold;
+}
+
+.upload-another-btn {
+  padding: 10px 20px;
+  background: var(--primary-color);
+  color: var(--text-color);
+  border: none;
+  border-radius: var(--border-radius);
+  cursor: pointer;
+  font-size: 15px;
+  font-weight: bold;
+  margin-top: 10px;
+}
+
+.upload-another-btn:hover {
+  background: var(--primary-hover-color);
+}
+
+.link-section {
+  display: flex;
+  gap: 10px;
+  margin: 20px 0;
+}
+
+.link-section input {
+  flex: 1;
+  padding: 10px;
+  border: 1px solid var(--border-color);
+  border-radius: var(--border-radius);
+  background: var(--background-color);
+  color: var(--text-color);
+}
+
+.qrcode-section {
+  text-align: center;
+  padding: 20px;
+  background: var(--background-color);
+  border-radius: var(--border-radius);
+  margin: 20px 0;
+}
+
+.buttons-container {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+@media (max-width: 768px) {
+  .file-details-box {
+    grid-template-columns: 1fr; /* Stack elements vertically */
+    gap: 20px; /* Adjust gap for mobile */
+    padding: 20px; /* Reduce padding */
+  }
+
+  .file-details-box .file-icon,
+  .file-details-box .upload-options {
+    max-width: 100%;
+    box-sizing: border-box;
+  }
+
+  .dropzone {
+    padding: 20px; /* Reduce padding for dropzone */
+    max-width: 100%; /* Ensure it doesn't overflow */
+    box-sizing: border-box; /* Include padding in width calculation */
+  }
+
+  .expiration-control {
+    flex-direction: row; /* Arrange label and input horizontally */
+    align-items: center; /* Vertically align them */
+    justify-content: space-between; /* Space out label and input */
+  }
+
+  .expiration-input input[type="range"] {
+    display: none; /* Hide the slider on mobile */
+  }
+
+  .expiration-input {
+    flex-grow: 1; /* Allow the input container to grow */
+    justify-content: flex-end; /* Push the number input to the right */
+    display: flex; /* Ensure flex properties apply */
+  }
+
+  .expiration-input input[type="number"] {
+    width: 70px; /* Give it a fixed width again, or adjust as needed */
+  }
+
+  .dropzone p {
+    word-break: break-word; /* Allow long words to break */
+    white-space: normal;   /* Ensure normal text wrapping */
+  }
+
+  .qrcode-section img {
+    max-width: 100%;
+    height: auto;
+  }
+
+  .result-section {
+    width: 100%;
+    max-width: 100%;
+  }
+
+  .qrcode-section canvas {
+    max-width: 100%;
+    height: auto;
+  }
+
+  .link-section input[type="text"] {
+    width: 100%; /* Ensure the input takes full width */
+    box-sizing: border-box; /* Ensure padding is included in width */
+  }
+
+  .link-section {
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .copy-btn {
+    margin-left: 0;
+    width: 100%;
+    justify-content: center; /* Center content horizontally */
+  }
+}
