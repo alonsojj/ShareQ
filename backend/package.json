@@ -14,7 +14,9 @@
     "cors": "^2.8.5",
     "dotenv": "^17.2.3",
     "express": "^5.1.0",
+    "ioredis": "^5.8.2",
     "multer": "^2.0.2",
+    "node-cron": "^4.2.1",
     "uuid": "^13.0.0"
   },
   "devDependencies": {
