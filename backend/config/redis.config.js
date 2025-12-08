@@ -1,11 +1,15 @@
 const Redis = require("ioredis");
 
+const host = process.env.REDIS_HOST || "127.0.0.1";
+
 // Create a new Redis client instance.
-// It will connect to 127.0.0.1:6379 by default, which matches our docker-compose setup.
-const redis = new Redis();
+const redis = new Redis({
+  host: host,
+  port: 6379,
+});
 
 redis.on("connect", () => {
-  console.log("Conectado ao Redis.");
+  console.log(`Conectado ao Redis em ${host}.`);
 });
 
 redis.on("error", (err) => {

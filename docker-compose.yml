@@ -15,14 +15,19 @@ services:
     container_name: presentation_backend
     ports:
       - "3001:3001"
+    environment:
+      - REDIS_HOST=redis
     env_file:
-      - ./backend/.env
+      - ./.env
     depends_on:
       - redis
     restart: unless-stopped
 
   frontend:
-    build: ./client
+    build:
+      context: ./client
+      args:
+        - VITE_API_URL=${VITE_API_URL:-http://localhost:3001}
     container_name: presentation_frontend
     ports:
       - "5173:80"

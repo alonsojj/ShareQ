@@ -17,7 +17,7 @@
     "ioredis": "^5.8.2",
     "multer": "^2.0.2",
     "node-cron": "^4.2.1",
-    "uuid": "^13.0.0"
+    "uuid": "^8.3.2"
   },
   "devDependencies": {
     "nodemon": "^3.1.10"

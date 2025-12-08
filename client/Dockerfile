@@ -1,6 +1,9 @@
 # Stage 1: Build the React application
 FROM node:18-alpine AS build
 
+# Declare build arguments
+ARG VITE_API_URL
+
 # Set the working directory
 WORKDIR /app
 
@@ -12,6 +15,9 @@ RUN npm install
 
 # Copy the rest of the application source code
 COPY . .
+
+# Set the environment variable for the build command
+ENV VITE_API_URL=$VITE_API_URL
 
 # Build the application
 RUN npm run build
