@@ -1,8 +1,22 @@
+import { useState, useEffect } from "react";
 import { QRCodeSVG } from "qrcode.react";
 import { FaDownload, FaExternalLinkAlt } from "react-icons/fa";
 import { LuClipboardCopy } from "react-icons/lu";
 
 const ResultSection = ({ result, onCopyToClipboard, copied }) => {
+  const [qrCodeDataUrl, setQrCodeDataUrl] = useState("");
+
+  useEffect(() => {
+    if (result && result.url) {
+      const svgElement = document.getElementById("qr-code-svg");
+      if (svgElement) {
+        const svgString = new XMLSerializer().serializeToString(svgElement);
+        const dataUrl = `data:image/svg+xml;base64,${btoa(svgString)}`;
+        setQrCodeDataUrl(dataUrl);
+      }
+    }
+  }, [result]);
+
   if (!result) return null;
 
   return (
@@ -18,10 +32,10 @@ const ResultSection = ({ result, onCopyToClipboard, copied }) => {
       </div>
       <h3>QR Code:</h3>
       <div className="qrcode-section">
-        <QRCodeSVG value={result.url} size={200} />
+        <QRCodeSVG value={result.url} size={200} id="qr-code-svg" />
       </div>
       <div className="buttons-container">
-        <a href={result.qrCode} download="qrcode.png" className="download-button">
+        <a href={qrCodeDataUrl} download="qrcode.svg" className="download-button">
           <FaDownload /> Baixar QR Code
         </a>
         <a

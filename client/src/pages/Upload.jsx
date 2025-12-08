@@ -45,12 +45,6 @@ function Upload() {
     }
   };
 
-  const copyToClipboard = (text) => {
-    navigator.clipboard.writeText(text);
-    setCopied(true);
-    setTimeout(() => setCopied(false), 2000); // Reset after 2 seconds
-  };
-
   const handleUploadAnother = () => {
     setFile(null);
     setCustomName("");
@@ -58,6 +52,15 @@ function Upload() {
     setResult(null);
     setUploadSuccess(false);
     setCopied(false);
+  };
+
+  const handleCopyToClipboard = (text) => {
+    navigator.clipboard.writeText(text).then(() => {
+      setCopied(true);
+      setTimeout(() => {
+        setCopied(false);
+      }, 2000);
+    });
   };
 
   const handleExpiresInDaysChange = (e) => {
@@ -99,7 +102,7 @@ function Upload() {
 
       <ResultSection
         result={result}
-        onCopyToClipboard={copyToClipboard}
+        onCopyToClipboard={handleCopyToClipboard}
         copied={copied}
       />
     </div>
