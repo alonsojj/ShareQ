@@ -107,6 +107,12 @@
   color: var(--text-secondary-color);
 }
 
+.dropzone .dropzone-info {
+  font-size: 0.9rem;
+  color: var(--text-secondary-color);
+  margin-top: 10px;
+}
+
 .result-section {
   margin-top: 30px;
   background: var(--secondary-color);

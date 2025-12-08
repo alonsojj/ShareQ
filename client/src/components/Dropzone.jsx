@@ -5,7 +5,6 @@ const Dropzone = ({ onDrop }) => {
     onDrop,
     accept: {
       "application/pdf": [".pdf"],
-      "application/vnd.ms-powerpoint": [".ppt"],
       "application/vnd.openxmlformats-officedocument.presentationml.presentation": [
         ".pptx",
       ],
@@ -21,6 +20,7 @@ const Dropzone = ({ onDrop }) => {
     >
       <input {...getInputProps()} />
       <p>Arraste e solte o arquivo aqui, ou clique para selecionar</p>
+      <p className="dropzone-info">Apenas arquivos .pptx e .pdf são aceitos.</p>
     </div>
   );
 };
