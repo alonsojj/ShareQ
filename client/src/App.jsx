@@ -7,7 +7,7 @@ function App() {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/upload" element={<Upload />} />
+        <Route path="/" element={<Upload />} />
         <Route path="/view/:id" element={<View />} />
       </Routes>
     </BrowserRouter>

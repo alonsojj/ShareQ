@@ -1,11 +1,13 @@
 import { useState, useEffect, useRef, useMemo, useCallback } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import axios from "axios";
 import { Helmet } from "react-helmet";
 import { Document, Page, pdfjs } from "react-pdf";
 import { FaFileDownload, FaShareAlt, FaTh } from "react-icons/fa";
 import { IoIosArrowBack, IoIosArrowForward } from "react-icons/io";
 import "./View.css";
+
+import ShareMenu from "../components/ShareMenu";
 
 pdfjs.GlobalWorkerOptions.workerSrc = `//unpkg.com/pdfjs-dist@${pdfjs.version}/build/pdf.worker.min.mjs`;
 
@@ -55,18 +57,21 @@ const ThumbnailBar = ({ numPages, pageNumber, onThumbnailClick, pdfUrl }) => {
 
 export const PDFViewer = () => {
   const { id } = useParams();
+  const navigate = useNavigate();
+  const mainRef = useRef(null);
   const [presentation, setPresentation] = useState(null);
   const [pdfUrl, setPdfUrl] = useState("");
   const [loading, setLoading] = useState(true);
   const [numPages, setNumPages] = useState(0);
   const [pageNumber, setPageNumber] = useState(1);
-  const [pageHeight, setPageHeight] = useState(0);
+  const [pageWidth, setPageWidth] = useState(0);
   const [pdfError, setPdfError] = useState(null);
   const [showHeader, setShowHeader] = useState(true);
   const [showThumbnails, setShowThumbnails] = useState(false);
   const [slideDirection, setSlideDirection] = useState(null);
   const [animating, setAnimating] = useState(false);
   const [isMobile, setIsMobile] = useState(window.innerWidth <= 768);
+  const [showShareMenu, setShowShareMenu] = useState(false);
 
   useEffect(() => {
     const checkIsMobile = () => setIsMobile(window.innerWidth <= 768);
@@ -85,18 +90,19 @@ export const PDFViewer = () => {
   }, [isMobile]);
 
   useEffect(() => {
-    const updateHeight = () => {
-      const availableHeight =
-        window.innerHeight -
-        (isMobile ? 64 : 0) -
-        (showThumbnails ? 110 : 0) -
-        32;
-      setPageHeight(Math.min(availableHeight, 1200));
+    const mainEl = mainRef.current;
+    if (!mainEl) return;
+
+    const resizeObserver = new ResizeObserver(() => {
+      setPageWidth(mainEl.clientWidth);
+    });
+
+    resizeObserver.observe(mainEl);
+
+    return () => {
+      resizeObserver.disconnect();
     };
-    updateHeight();
-    window.addEventListener("resize", updateHeight);
-    return () => window.removeEventListener("resize", updateHeight);
-  }, [isMobile, showThumbnails]);
+  }, []);
 
   useEffect(() => {
     if (!id) return;
@@ -152,8 +158,7 @@ export const PDFViewer = () => {
     if (pdfUrl) window.open(pdfUrl, "_blank");
   };
   const handleShare = () => {
-    navigator.clipboard.writeText(window.location.href);
-    alert("Link copiado para área de transferência!");
+    setShowShareMenu(true);
   };
 
   useEffect(() => {
@@ -184,11 +189,10 @@ export const PDFViewer = () => {
             className={`nv-pdf-page-wrapper${
               slideDirection ? ` nv-slide-${slideDirection}` : ""
             }`}
-            style={{ height: pageHeight }}
           >
             <Page
               pageNumber={pageNumber}
-              height={pageHeight}
+              width={pageWidth}
               renderTextLayer={false}
               renderAnnotationLayer={false}
               className="nv-pdf-page"
@@ -197,7 +201,7 @@ export const PDFViewer = () => {
         )}
       </Document>
     ),
-    [pdfUrl, pageNumber, pageHeight, slideDirection, pdfError]
+    [pdfUrl, pageNumber, pageWidth, slideDirection, pdfError]
   );
 
   if (loading) {
@@ -218,10 +222,7 @@ export const PDFViewer = () => {
         <section className="nv-notfound-card">
           <h2>Apresentação não encontrada</h2>
           <p>Verifique o link e tente novamente</p>
-          <button
-            className="nv-btn"
-            onClick={() => (window.location.href = "/")}
-          >
+          <button className="nv-btn" onClick={() => navigate("/")}>
             Voltar ao Início
           </button>
         </section>
@@ -260,6 +261,7 @@ export const PDFViewer = () => {
         </div>
       </header>
       <main
+        ref={mainRef}
         className={`nv-pdf-area${
           showThumbnails ? " nv-pdf-area-with-thumbnails" : ""
         }`}
@@ -299,8 +301,13 @@ export const PDFViewer = () => {
           />
         )}
       </main>
+      {showShareMenu && (
+        <ShareMenu
+          url={window.location.href}
+          onClose={() => setShowShareMenu(false)}
+        />
+      )}
     </div>
   );
 };
-
 export default PDFViewer;
